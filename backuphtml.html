@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meducation X-ray Result</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            width: 100%;
+            background-color: #00d1c1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 60px;
+        }
+
+        .back-button {
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+            position: absolute;
+            left: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            color: white;
+        }
+
+        .result-box {
+            padding: 20px 0;
+            width: 100%;
+            margin-top: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .xray-result {
+            width: 300px;
+            height: 300px;
+            margin: 40px auto;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        .xray-result img {
+            width: 280px;
+            height: 280px;
+        }
+
+        .description {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .covid-info {
+            background-color: #00d1c1;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <button class="back-button" onclick="goBack()">&#x21A9;</button>
+            <h1>Meducation</h1>
+        </header>
+        <div class="result-box">
+            <h2>Your X-ray Result</h2>
+            <div class="xray-result">
+                <img id="xrayImage" alt="X-ray Result" />
+            </div>
+            <div class="description">
+                This is your uploaded X-ray
+            </div>
+            <div class="description">
+                Predicted Class: {{ session['predicted_class'] }}
+            </div>
+            <div class="description">
+                Confidence: {{ session['confidence'] }}%
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        window.onload = function() {
+    const uploadedImage = sessionStorage.getItem('uploadedImage');
+    if (uploadedImage) {
+        document.getElementById('xrayImage').src = uploadedImage;  // แสดงรูปภาพที่ถูกเก็บใน sessionStorage โดยตรง
+    } else {
+        alert('No image found! Please upload an X-ray first.');
+        window.location.href = 'upload.html';
+    }
+};
+
+    </script>
+    
+</body>
+
+</html>
